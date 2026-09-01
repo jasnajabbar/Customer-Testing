@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1")
+//@RequestMapping("/api/v1")
 public class CustomerController {
 
     @Autowired
@@ -33,7 +33,7 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.OK).body(customerEntity.getCustomerVerificationId());
     }
 
-    @PostMapping(value = "/create")
+    @PostMapping(value = "/api/v1/create")
     public ResponseEntity<CustomerDto> createCustomer(@RequestBody CustomerDto customerDto){
         CustomerDto customerEntity= customerService.createCustomer(customerDto);
       return ResponseEntity.status(HttpStatus.CREATED).body(customerEntity);
@@ -49,19 +49,19 @@ public class CustomerController {
         return httpServletRequest.getSession().getId();
     }
 
-    @GetMapping(value = "/getById/{customerId}")
+    @GetMapping(value = "/api/v1/getById/{customerId}")
     public ResponseEntity<String> getById(@PathVariable Integer customerId){
         CustomerDto customerEntity= customerService.getById(customerId);
         return ResponseEntity.status(HttpStatus.OK).body("Retrieved");
     }
 
-    @PatchMapping(value = "/updateById/{customerId}")
+    @PatchMapping(value = "/api/v1/updateById/{customerId}")
     public ResponseEntity<CustomerDto> updateById(@PathVariable Integer customerId){
         CustomerDto customerEntity=customerService.updateCustomer(customerId);
         return ResponseEntity.status(HttpStatus.OK).body(customerEntity);
     }
 
-    @DeleteMapping(value = "/delete/{customerId}")
+    @DeleteMapping(value = "/api/v1/delete/{customerId}")
     public ResponseEntity<String> deleteById(@PathVariable Integer customerId){
         customerService.deleteCustomer(customerId);
         return ResponseEntity.ok("Customer deleted successfully");

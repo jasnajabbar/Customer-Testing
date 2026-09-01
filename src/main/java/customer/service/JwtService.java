@@ -26,6 +26,7 @@ public class JwtService {
                 .expiration(new Date(System.currentTimeMillis()+ 1000*60*10))
                 .signWith(getKey(), SignatureAlgorithm.HS256).compact();
     }
+
     private SecretKey getKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET);
         return Keys.hmacShaKeyFor(keyBytes);
@@ -34,6 +35,7 @@ public class JwtService {
     public String extractUsername(String token) {
             return extractClaim(token,Claims::getSubject);
         }
+
     public <T> T extractClaim(String token, Function<Claims,T>  claimResolver){
         Claims claims=extractAllClaim(token);
         return claimResolver.apply(claims);

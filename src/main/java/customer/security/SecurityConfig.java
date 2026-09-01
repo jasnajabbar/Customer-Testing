@@ -41,7 +41,7 @@ public class SecurityConfig {
         //jwt
         return httpSecurity.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(req->
-                        req.requestMatchers("register","login")
+                        req.requestMatchers("register","login","/api/v1/**")
                 .permitAll().anyRequest().authenticated())
                 .sessionManagement(session->session.
                         sessionCreationPolicy(SessionCreationPolicy.STATELESS))

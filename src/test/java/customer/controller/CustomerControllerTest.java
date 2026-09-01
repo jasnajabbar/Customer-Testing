@@ -2,8 +2,11 @@ package customer.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import customer.dto.CustomerDto;
 import customer.service.CustomerService;
+import customer.service.CustomerVerificationService;
+import customer.service.JwtService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -17,6 +20,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @WebMvcTest(CustomerController.class)
+@AutoConfigureMockMvc(addFilters = false)
 public class CustomerControllerTest {
 
     @Autowired
@@ -27,6 +31,12 @@ public class CustomerControllerTest {
 
     @MockitoBean
     CustomerService customerService;
+
+    @MockitoBean
+    CustomerVerificationService customerVerificationService;
+
+    @MockitoBean
+    JwtService jwtService;
 
     @Test
     void createCustomerTest() throws Exception {
